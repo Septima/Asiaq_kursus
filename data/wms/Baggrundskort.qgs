@@ -4,9 +4,9 @@
     <mapcanvas>
         <units>meters</units>
         <extent>
-            <xmin>-896996.56713135330937803</xmin>
+            <xmin>-1521012.72035738779231906</xmin>
             <ymin>6452994.97489288821816444</ymin>
-            <xmax>1751639.23238061810843647</xmax>
+            <xmax>2375655.3856066525913775</xmax>
             <ymax>9235893.41861975193023682</ymax>
         </extent>
         <projections>0</projections>
@@ -23,7 +23,7 @@
             </spatialrefsys>
         </destinationsrs>
     </mapcanvas>
-    <legend updateDrawingOrder="true" activeLayer="theme_satellit_mosaic20140219140125807">
+    <legend updateDrawingOrder="true" activeLayer="theme_stednavne20140219140805376">
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="theme-g100v-ortofoto" showFeatureCount="0">
             <filegroup open="false" hidden="false">
                 <legendlayerfile isInOverview="0" layerid="theme_g100v_ortofoto20140219141217840" visible="1"/>
@@ -54,6 +54,11 @@
                 <legendlayerfile isInOverview="0" layerid="theme_g250v20140219140847353" visible="1"/>
             </filegroup>
         </legendlayer>
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="WMTS nun0000_theme-g50_utm24" showFeatureCount="0">
+            <filegroup open="false" hidden="false">
+                <legendlayerfile isInOverview="0" layerid="nun0000_theme_g50_utm2420140219145125204" visible="1"/>
+            </filegroup>
+        </legendlayer>
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="theme-stednavne" showFeatureCount="0">
             <filegroup open="false" hidden="false">
                 <legendlayerfile isInOverview="0" layerid="theme_stednavne20140219140805376" visible="1"/>
@@ -65,7 +70,42 @@
             </filegroup>
         </legendlayer>
     </legend>
-    <projectlayers layercount="8">
+    <projectlayers layercount="9">
+        <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+            <id>nun0000_theme_g50_utm2420140219145125204</id>
+            <datasource>crs=EPSG:32624&amp;featureCount=10&amp;format=image/png&amp;layers=nun0000_theme-g50_utm24&amp;styles=_null&amp;tileMatrixSet=nun0000&amp;url=http://gwc.nunagis.gl/service/wmts?servicename%3Dnun0000_wms_public%26request%3Dgetcapabilities%26version%3D1.3.0%26service%3DWMts</datasource>
+            <title></title>
+            <abstract></abstract>
+            <keywordList>
+                <value></value>
+            </keywordList>
+            <layername>WMTS nun0000_theme-g50_utm24</layername>
+            <srs>
+                <spatialrefsys>
+                    <proj4>+proj=utm +zone=24 +datum=WGS84 +units=m +no_defs</proj4>
+                    <srsid>3108</srsid>
+                    <srid>32624</srid>
+                    <authid>EPSG:32624</authid>
+                    <description>WGS 84 / UTM zone 24N</description>
+                    <projectionacronym>utm</projectionacronym>
+                    <ellipsoidacronym>WGS84</ellipsoidacronym>
+                    <geographicflag>false</geographicflag>
+                </spatialrefsys>
+            </srs>
+            <customproperties>
+                <property key="identify/format" value="Undefined"/>
+            </customproperties>
+            <provider>wms</provider>
+            <pipe>
+                <rasterrenderer opacity="1" alphaBand="-1" band="1" type="singlebandcolordata">
+                    <rasterTransparency/>
+                </rasterrenderer>
+                <brightnesscontrast brightness="0" contrast="0"/>
+                <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+                <rasterresampler maxOversampling="2"/>
+            </pipe>
+            <blendMode>0</blendMode>
+        </maplayer>
         <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
             <id>theme_g100v20140219141130137</id>
             <datasource>crs=EPSG:32624&amp;featureCount=10&amp;format=image/png&amp;layers=theme-g100v&amp;styles=&amp;url=http://dk.nunagis.gl/wms?servicename%3Dnun0000_wms_public%26version%3D1.3.0%26</datasource>
@@ -366,8 +406,8 @@
             <Automatic type="bool">true</Automatic>
             <DegreeFormat type="QString">D</DegreeFormat>
         </PositionPrecision>
-        <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
         <WMSContactPhone type="QString"></WMSContactPhone>
+        <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
         <WMSServiceAbstract type="QString"></WMSServiceAbstract>
         <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
         <Measure>
