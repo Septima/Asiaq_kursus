@@ -10,12 +10,12 @@ Workshoppen har til formål, at give deltagere et grundlæggende indblik i QGIS 
 
 ## Øvelse 2: Importér data
 
-## Øvelse 2.1: Visning af data
+## Øvelse 3.: Visning af data
 
-## Øvelse 3: Redigér data
+## Øvelse 4: Redigér data
 
-## Øvelse 4: Brug af Views
+## Øvelse 5: Brug af Views
 
-## Øvelse 4: Avanceret Attributredigering
+## Øvelse 6: Avanceret Attributredigering
 
-## Øvelse 5: 
+## Øvelse 7: 
