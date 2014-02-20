@@ -14,9 +14,9 @@ Formålet med øvelsen er, at deltageren får præsenteret mulighederne for at v
 5. Alternativt kan man "trække" tabellen over i *layer* panelet
 
 
-### Visning af fra "Browser"
+### Visning fra "Browser-panel"
 
 1. Åben PostGIS i Browser-panelet (Under layer-panelet)
 2. Vælg schema og højreklik på tabellen og vælg "Add layer"
-3. Alternativt kan man "trække" tabellen fra broser-panel til layer-panel
+3. Alternativt kan man "trække" tabellen fra browser-panel til layer-panel
 
