@@ -1,7 +1,8 @@
 Analyser på DTM/DSM
-=================================
+=====================================
 Data:
 
+Til første del anvendes data i mappen Kolding
 * DTM
 * DSM
 * Bygninger
@@ -33,17 +34,17 @@ Udlæse værdier fra rasteren
 ----------------------
 Indlæs både DTM og DSM.
 
-# Info
+### Info
 Prøv at klikke på rasteren med "Info"-værktøjet.
 
-# Value tool
+### Value tool
 Installér pluginet "Value Tool". (Klik Plugins -> Manage and install plugins... -> Get more. Indtast "Value tool" i søgeboksen).
 
 Nu kommer der et ekstra panel under lagkontrollen. (Hvis ikke kan det slås til under View -> Panels -> Value Tool).
 
 I Value Tool panelet sættes et flueben i "Active". Prøv at føre musen rundt over rasteren i kortvinduet.
 
-# Profile tool
+### Profile tool
 Installér pluginet "Profile tool". (Klik Plugins -> Manage and install plugins... -> Get more. Indtast "Profile tool" i søgeboksen)
 
 Aktivér profil-værktøjet ved at klikke på ikonet i værktøjslinien. Nu dukker der et panel op i bunden af skærmen. Sørg for at både DTM og DSM er aktive lag i Profil toolet og giv dem forskellige farver i toolet.
@@ -223,6 +224,8 @@ Der oprettes et custom CRS for hver UTM-zone, der ønskes benyttet. I parametren
 
 Attu
 -----------------------------
+Til denne del af øvelsen anvendes data fra mappen Attu.
+
 Indlæs Attu_by_interpoleret.tif og gimpdem1_2_compress.tif.
 
 Attu_by_interpoleret.tif har 1m opløsning og er dannet ved interpolation af 2-meter-kurverne fra Attu ved brug af algoritmen "r.surf.contour". Dette er gjort forud, da det tager meget lang tid.
@@ -245,6 +248,6 @@ TIP: VRT-filer er et ekstremt kraftfuldt værktøj til rasterhåndtering.
 
 OBS: Prøv at trække gimp-DEM fra Attu-by-DEM. Kig på differensrasteren under Properties -> Metadata ses det, at fifferensen gennemsnitligt er ca 25m. Er der tale om et egentligt offset, er det nemt fixet med Raster Calculator. Prøv det eventuelt.
 
-Analyser på Attu
+Analyser på Attu data
 ------------------------------------
 Prøv eventuelt at udføre analyser på den kombinerede DEM.
