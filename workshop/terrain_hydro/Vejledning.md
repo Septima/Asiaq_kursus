@@ -1,3 +1,5 @@
+Analyser på DTM/DSM
+=================================
 Data:
 
 * DTM
@@ -188,5 +190,61 @@ I Processing toolbox aktiveres algoritmen "Watershed Basins".
 
 Kør processen og se på output.
 
+TIP: Oplandene kan vektoriseres på flere måder i QGIS. Feks med Processing Algoritmen "Vectorising grid classes"
 
+Processing model
+-----------------------------
+Særligt interesserede kan kigge på Processing algoritmen "Watershed from DEM and Threshold", som samler ovenstående trin i én algoritme.
 
+Yderligere analyser
+-----------------------------
+Prøv eventuelt at kigge på viewshedanalysen i Processing Algoritmen "r.los".
+
+Med ovenstående metoder til rasterisering og beregninger med map algebra kan der i kombination med pluginet "Zonal statistics" laves mere eller mindre komplicerede volumenbereginger. Prøv eventuelt at udføre en volumenberegning.
+
+Grønlandske data
+=============================
+UTM
+-----------------------------
+Som sikkert bekendt kan transformation til/fra UTM-koordinater langt uden for UTM-zonens definitionsområde være forbundet med relativt store fejl. Vi har set fejl på op til 1000m ved transformation af koordinater frem og tilbage mellem zone 19 og zone 24.
+
+I QGIS kan dette problem undgås ved at anvende en brugerdefineret udgave af UTM-projektionen i stedet for QGIS' indbyggede.
+
+Klik Settings -> Custom CRS...
+
+I Custom CRS-dialogen klikkes "Add new CRS". Det nye koordinatreferencesystem gives et navn og parametrene indtastes. Eksempel for UTM zone 22:
+
+```
++proj=etmerc +lat_0=0 +lon_0=-51 +k=0.9996 +units=m +x_0=500000 +datum=WGS84 +nodefs +wktext
+```
+Navnet på dette CRS kunne feks være ```UTM22N WGS84 Engsager Extended```
+
+Der oprettes et custom CRS for hver UTM-zone, der ønskes benyttet. I parametrene ovenfor ændres blot parameterværdien lon_0 til zonens midtmeridian.
+
+Attu
+-----------------------------
+Indlæs Attu_by_interpoleret.tif og gimpdem1_2_compress.tif.
+
+Attu_by_interpoleret.tif har 1m opløsning og er dannet ved interpolation af 2-meter-kurverne fra Attu ved brug af algoritmen "r.surf.contour". Dette er gjort forud, da det tager meget lang tid.
+
+Højreklik på begge lag, vælg Properties og se i General-tabben, at de to lag har forskellige CRS (Notér også gimpdems EPSG-kode). QGIS reprojicerer således et af de to lag on the fly, således at de kan overlejres. For at undgå ovennævnte transformationsfejl sættes både projektets og Attu-rasterens CRS til det ovenfor oprettede ```UTM22N WGS84 Engsager Extended```. Lagets CRS sættes ved at højreklikke på laget og vælge "Set layer CRS". Projektets kan bla sættes ved at klikke Project -> Prject Properties.
+
+Først transformeres gimpdem til UTM22. Klik Raster -> Projections -> Warp. Vælg gimpdem som input og vælg et passende outputnavn eks "gimpdem_utm22.tif". Source CRS sættes til gimpdems EPSG-kode. I Target CRS vælges UTM22 med Engsager Extended. Resampling method vælges Bilinear. Klik Ok. Det burde tage under et minut.
+
+Nu ønsker vi at klippe et passende område omkring Attu ud af gimpdem_utm22. Feks 389500,7536300 : 393600,7539200. Derudover resampler vi til 1m opløsning. I Processing Toolbox aktiveres algoritmen "r.resamp.interp". Som input vælges gimpdem_utm22. Interpolation method sættes til bilinear. GRASS region extent sættes til "389500,393600,7536300,7539200" og Cellsize sættes til 1.0. Vælg et passende output navn eksempelvis "gimpdem_utm22_attu.tif". Kør algoritmen. Det burde tage under et minut.
+
+Kig på data.
+
+Nu har vi to DEMs fra Attu-området. Attu_by_interpoleret fra byområdet og gimpdem_utm22_attu i det åbne land. Begge er i UTM22 og har 1m opløsning.
+
+Der er flere metoder til at kombinere de to rastere. Her bruger vi en såkaldt VRT-fil (Virtual Raster). Sørg for at kun de to ønskede rastere er indlæst og sørg for at Attu_by_interpoleret ligger neders i lagkontrollen. Klik Raster -> Miscellaneous -> Build Virtual Raster (Catalog). Markér "Use visible raster layers for input", vælg en passende output fil. Klik Ok. Dette tager under et sekund.
+
+Kig på output filen med en texteditor. QGIS opfatter denne fil som en raster på lige fod med alle andre rastere. Prøv feks at indlæse filen i QGIS.
+
+TIP: VRT-filer er et ekstremt kraftfuldt værktøj til rasterhåndtering.
+
+OBS: Prøv at trække gimp-DEM fra Attu-by-DEM. Kig på differensrasteren under Properties -> Metadata ses det, at fifferensen gennemsnitligt er ca 25m. Er der tale om et egentligt offset, er det nemt fixet med Raster Calculator. Prøv det eventuelt.
+
+Analyser på Attu
+------------------------------------
+Prøv eventuelt at udføre analyser på den kombinerede DEM.
