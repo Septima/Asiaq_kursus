@@ -20,3 +20,6 @@ Formålet med øvelsen er, at deltageren får præsenteret mulighederne for at v
 2. Vælg schema og højreklik på tabellen og vælg "Add layer"
 3. Alternativt kan man "trække" tabellen fra browser-panel til layer-panel
 
+
+Prøv nu at lave kartogrfai på det valgte lag
+

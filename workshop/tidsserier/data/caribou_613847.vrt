@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="Sheet1">
+        <SrcDataSource>/Users/mbj/Downloads/retidsseriedata/Caribou_613856.xlsx</SrcDataSource>
+        <GeometryType>wkbPoint</GeometryType>
+        <LayerSRS>epsg:32622</LayerSRS>
+        <GeometryField encoding="PointFromColumns" y="gps_utm_northing" x="gps_utm_easting"/>
+    </OGRVRTLayer>
+</OGRVRTDataSource>
