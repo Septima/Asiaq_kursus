@@ -6,6 +6,8 @@ Er du ikke interesseret i programmering vil det nok være relevant at kigge på 
 
 Er du interesseret i programmering vil de øvrige opgaver også have interesse.
 
+Er der tid til overs, kan du prøve at automatisere en af dine egne opgaver.
+
 Processing Toolbox
 =============================================
 Aktivér Processing Toolbox (Klik Processing -> Toolbox).
