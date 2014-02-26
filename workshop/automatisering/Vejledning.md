@@ -236,8 +236,7 @@ Plugins
 ==========================
 Den nemmeste måde at komme i gang med at bygge plugins er, at installere pluginet "Plugin Builder". Dette plugin danner et rammeværk af filer, som skal til for at bygger sit eget plugin. Derefter er det "bare" at fylde sin egen kode ind.
 
-En meget effektiv måde at lære hvordan plugins kodes er ved at kigge på de eksisterende plugins. Disse findes i et bibliotek a la
-```c:\Users\BRUGERNAVN\.qgis2\python\plugins```
+En meget effektiv måde at lære hvordan plugins kodes er ved at kigge på de eksisterende plugins. Disse findes i et bibliotek a la c:\Users\BRUGERNAVN\.qgis2\python\plugins
 
 Hvis du ikke allerede har installeret plugins, så er nu et godt tidspunkt. Kig derefter i filerne i ovenstående mappe med en textedit (feks notepad).
 
@@ -245,7 +244,7 @@ TIP: Står man nu med et konkret kodeproblem, man ikke kan løse, kan man kigge 
 
 For at kunne redigere i GUI for plugins, skal man have programmet Qt Creator installeret. Det kan downloades på (QT Projects hjemmeside)[https://qt-project.org/downloads]. Deres online installer fungerer fint. Der kan installeres en masse mere, end hvad der er brug for - der er kun brug for QT Creator.
 
-Pluginet (eller måske rettere det bibliotek, som indeholder pluginet) placeres i mappen ```c:\Users\BRUGERNAVN\.qgis2\python\plugins```. Efter en genstart af QGIS er pluginet til rådighed i QGIS.
+Pluginet (eller måske rettere det bibliotek, som indeholder pluginet) placeres i mappen c:\Users\BRUGERNAVN\.qgis2\python\plugins. Efter en genstart af QGIS er pluginet til rådighed i QGIS.
 
 TIP: I stedet for at genstarte, kan man installere pluginet "Plugin Reloader". Med dette plugin kan ens plugin genindlæses ved et tryk på en knap, og der spares en genstart af QGIS.
 
