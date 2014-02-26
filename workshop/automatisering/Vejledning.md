@@ -1,20 +1,10 @@
+Indledning
+============================================
+Der er adskillige måder, hvormed man kan "automatisere" opgaver i QGIS. Nogle metoder kræver programmering mens andre kan konfigureres i brugergrænsefladen.
 
-Processing modeller
- - Byg flere
- - Hvor gemmes?
- - Udveksle
- - Save as python script
- - Batch afvikling
+Er du ikke interesseret i programmering vil det nok være relevant at kigge på opgaverne i Processing Toolbox og i Atlas.
 
-Processing scripts
-
-Python console
-
-Brugerdef funktioner som er tilgængelige i expression builder
-
-Plugin builder
-
-
+Er du interesseret i programmering vil de øvrige opgaver også have interesse.
 
 Processing Toolbox
 =============================================
@@ -136,7 +126,7 @@ print layer
 ```
 Output af ovenstående er noget i retningen af ```<qgis.core.QgsVectorLayer object at 0x114594f80>```.
 
-Nu kan vi ved at skrive ```help(layer)```få at vide, hvad vi kan gøre med layer-objektet.
+Nu kan vi ved at skrive ```help(layer)```få at vide, hvad vi kan gøre med layer-objektet. Vi kan feks:
 
 ```python
 layer.name()
@@ -146,6 +136,7 @@ layer.source()
 
 Vi kan også tage fat i features fra laget:
 ```python
+layer = iface.activeLayer()
 for feature in layer.getFeatures():
   print feature.id()
   geom = feature.geometry()
@@ -157,6 +148,7 @@ for feature in layer.getFeatures():
 Lad os sige, at vi er interesserede i det samlede antal koordinater i bygningstemaet. Dette vill kunne beregnes således:
 
 ```python
+layer = iface.activeLayer()
 numpoints = 0
 for feature in layer.getFeatures():
   geom = feature.geometry()
@@ -169,7 +161,7 @@ for feature in layer.getFeatures():
     print "Ups dette er ikke en polygon"
 ```
 
-Scripts
+Python scripts
 ================================
 
 Har man brug for den samme kode flere gange, kan man i stedet for at taste den ind i konsollen eksekvere den som et script. 
@@ -247,17 +239,24 @@ En meget effektiv måde at lære hvordan plugins kodes er ved at kigge på de ek
 
 Hvis du ikke allerede har installeret plugins, så er nu et godt tidspunkt. Kig derefter i filerne i ovenstående mappe med en textedit (feks notepad).
 
-Står man nu med et konkret kodeproblem, man ikke kan løse, kan man kigge efter et plugin, som formodentlig har løst problemet, installere pluginnet og derefter kigge i dets kode. Dette er nok den mest effektive måde at blive klog på.
+TIP: Står man nu med et konkret kodeproblem, man ikke kan løse, kan man kigge efter et plugin, som formodentlig har løst problemet, installere pluginnet og derefter kigge i dets kode. Dette er nok den mest effektive måde at blive klog på.
 
 For at kunne redigere i GUI for plugins, skal man have programmet Qt Creator installeret. Det kan downloades på (QT Projects hjemmeside)[https://qt-project.org/downloads]. Deres online installer fungerer fint. Der kan installeres en masse mere, end hvad der er brug for - der er kun brug for QT Creator.
 
+Pluginet (eller måske rettere det bibliotek, som indeholder pluginet) placeres i mappen ```c:\Users\BRUGERNAVN\.qgis2\python\plugins```. Efter en genstart af QGIS er pluginet til rådighed i QGIS.
+
+TIP: I stedet for at genstarte, kan man installere pluginet "Plugin Reloader". Med dette plugin kan ens plugin genindlæses ved et tryk på en knap, og der spares en genstart af QGIS.
+
 Atlas
 ==========================
+Atlas er en måde at automatisere "print" af et kort for hver feature i et lag. Antag eksempelvis, at vi ønsker at printe et kort for hvert B-nummer, der opfylder et bestemt kriterium, således at printet eksempelvis kan sendes til ejerne.
 
+Prøv at indlæse data fra grundkortet og lav en symbolisering af lagene.
 
+Lav en ny Print Composer.
 
+Lav en passende opsætning af denne print composer.
 
+Når alt er klart klikkes på fanen "Atlas generation" til højre i composeren. Her aktiveres "Generate an atlas", "Composer map" sættes til hovedkortvinduet (ofte "Map 0") og "Coverage layer" sættes til det lag, der indeholder de features, som skal have et kort hver. I dette tilfælde kunne det være Bygningsnumre. Er coverage laget et polygon- eller linielag, kan kortudsnittet enten defineres ved en fast scale (som defineres i hovedkortet) eller ved geometriens bbox + X%. For punkter kan der kun benyttes en fast scala.
 
-
-
-
+Når alt er klart trykkes på PDF-eksport-knappen. Composeren vil nu spørge efter i bibliotek, hvor PDF'erne skal placeres og derefter laver Composeren forhåbentlig en PDF per bygning i denne mappe.
