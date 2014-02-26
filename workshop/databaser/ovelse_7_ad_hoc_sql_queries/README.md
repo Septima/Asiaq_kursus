@@ -15,7 +15,7 @@ select * from att0902.bygninger where "Info" = 'B-857'
 ```
 
 3. Klik Excecute (f5) og se resultatet. Klik "store" og gem SQL med et sigende navn
-4. Check af i ""load as new layer
+4. Check af i "load as new layer"
 5. Vælg kolonne med geometri og en id kolonne fra resultatet
 6. Giv laget et navn
 7. Klik Excecute (f5) igen og der burde være et nyt lag i kortet med de udvalgte objekter.
