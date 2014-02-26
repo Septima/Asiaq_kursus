@@ -105,6 +105,154 @@ TIP: Prøv at højreklikke på den nye algortime i Procesing Toolbox og vælg "S
 
 Python console
 =========================================
+QGIS har en interaktiv Python konsol. Den aktiveres ved at klikke Plugins -> Python Console.
+
+Der findes en "kogebog" til brug af Python i QGIS. Den hedder PyQGIS Cookbook og findes på QGIS´ [dokumentationsside] (http://qgis.org/en/docs/index.html#). På samme side findes også links til API-dokumenation som kan være nyttig/nødvendig, hvis man går dybere ind i python-udvikling til QGIS.
+
+I konsollen kan man direkte skrive python-kode, som bland andet kan interagere med QGIS. Prøv først at skrive 
+```python
+a = 1
+b = 2
+print a + b
+```
+
+I Pythonkonsollen kan man få noget information om objekter ved at skrive ```help(OBJEKTNAVN)```.
+
+Indlæs en Bygningerne fra grundkortet og gør laget aktivt i logkontrollen.
+
+I pythonkonsollen kan vi nu få fat i laget via objektet ```iface```. Prøv at skrive
+
+```python
+help(iface)
+```
+
+Og se på output.
+
+Prøv nu
+
+```python
+layer = iface.activeLayer()
+print layer
+```
+Output af ovenstående er noget i retningen af ```<qgis.core.QgsVectorLayer object at 0x114594f80>```.
+
+Nu kan vi ved at skrive ```help(layer)```få at vide, hvad vi kan gøre med layer-objektet.
+
+```python
+layer.name()
+layer.featureCount()
+layer.source()
+```
+
+Vi kan også tage fat i features fra laget:
+```python
+for feature in layer.getFeatures():
+  print feature.id()
+  geom = feature.geometry()
+  print geom.area()
+  attrs = feature.attributes()
+  print attrs
+```
+
+Lad os sige, at vi er interesserede i det samlede antal koordinater i bygningstemaet. Dette vill kunne beregnes således:
+
+```python
+numpoints = 0
+for feature in layer.getFeatures():
+  geom = feature.geometry()
+  if geom.type() == QGis.Polygon:
+    x = geom.asPolygon()
+    for ring in x:
+      numpoints += len(ring)
+      print numpoints
+  else:
+    print "Ups dette er ikke en polygon"
+```
+
+Scripts
+================================
+
+Har man brug for den samme kode flere gange, kan man i stedet for at taste den ind i konsollen eksekvere den som et script. 
+
+Installere "ScriptRunner" pluginet.
+
+Gem følgende i en fil, som du kalder "CountPoints.py":
+```python
+from qgis.core import QGis
+def run_script(iface):
+  layer = iface.activeLayer()
+  if not layer:
+    print "Intet aktivt lag"
+    return
+  numPts = 0
+  for feature in layer.getFeatures():
+    geom = feature.geometry()
+    if geom.type() == QGis.Point:
+      x = geom.asPoint()
+    elif geom.type() == QGis.Line:
+      x = geom.asPolyline()
+    elif geom.type() == QGis.Polygon:
+      x = geom.asPolygon()
+    else:
+      raise Exception("Unknown geometry type")
+    for sub in x:
+      numPts += len(sub)
+  print numPts
+```
+
+Aktiver ScriptRunner, tilføj det ovenfor oprettede script og kør scriptet i ScriptRunner.
+
+En anden måde at genbruge python-kode på er at tilføje den til filen
+```c:\Users\BRUGERNAVN\.qgis2\python\startup.py``` (Hvor Users\BRUGERNAVN afhænger af Windowsversion og brugernavn). Kode i denne fil eksekveres ved opstart af QGIS. Ovenstående funktionalitet kunne således tilføjes med et andet metodenavn til startup.py, hvorefter den ville være tilgængelig i konsollen.
+
+Custom expressions
+==================================
+Man kan også lave sine egne funktioner til Expression builderen (er tilgængelig feks i Field Calculator, Label motoren og flere andre steder).
+
+Lad os sige, at vi har brug for at kunne sætte antallet af koordinater i geometrien på som label. 
+
+I startup.py tilføjes følgende:
+
+```python
+from qgis.utils import qgsfunction
+from qgis.core import QGis
+
+@qgsfunction(0, "Python")
+def numpoints(values, feature, parent):
+    geom = feature.geometry()
+    if not geom:
+        return None
+    numPts = 0
+    if geom.type() == QGis.Point:
+      x = geom.asPoint()
+    elif geom.type() == QGis.Line:
+      x = geom.asPolyline()
+    elif geom.type() == QGis.Polygon:
+      x = geom.asPolygon()
+    else:
+      raise Exception("Unknown geometry type")
+    for sub in x:
+      numPts += len(sub)
+    return numPts
+```
+
+Genstart QGIS. Nu skulle funktionen "numpoints" være tilgængelige under kategorien "python" i expression builder, alle de steder den bruges. Prøv feks at sætte labels på et lag, hvor lablen indeholder antallet af punkter i geometrien.
+
+Plugins
+==========================
+Den nemmeste måde at komme i gang med at bygge plugins er, at installere pluginet "Plugin Builder". Dette plugin danner et rammeværk af filer, som skal til for at bygger sit eget plugin. Derefter er det "bare" at fylde sin egen kode ind.
+
+En meget effektiv måde at lære hvordan plugins kodes er ved at kigge på de eksisterende plugins. Disse findes i et bibliotek a la
+```c:\Users\BRUGERNAVN\.qgis2\python\plugins```
+
+Hvis du ikke allerede har installeret plugins, så er nu et godt tidspunkt. Kig derefter i filerne i ovenstående mappe med en textedit (feks notepad).
+
+Står man nu med et konkret kodeproblem, man ikke kan løse, kan man kigge efter et plugin, som formodentlig har løst problemet, installere pluginnet og derefter kigge i dets kode. Dette er nok den mest effektive måde at blive klog på.
+
+For at kunne redigere i GUI for plugins, skal man have programmet Qt Creator installeret. Det kan downloades på (QT Projects hjemmeside)[https://qt-project.org/downloads]. Deres online installer fungerer fint. Der kan installeres en masse mere, end hvad der er brug for - der er kun brug for QT Creator.
+
+Atlas
+==========================
 
 
 
@@ -113,10 +261,3 @@ Python console
 
 
 
-
-
-
-
-SKRALD
-----------------------
-userfunctions.getlogin.func(None, None, None)
