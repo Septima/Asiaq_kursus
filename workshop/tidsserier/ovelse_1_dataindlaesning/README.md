@@ -14,7 +14,7 @@ Expression/udtryk i field calculator
     '20' || substr("Acquisit_2", 7, 2) || '-' || substr("Acquisit_2", 0, 3) || '-' || substr("Acquisit_2", 4, 2) ||' ' ||    substr("Acquisit_2", 10, 5)||':00'
 
 
-4. Alternativ konverteres shapefilen til databsaen med DBmanager. Defefter kan der oprettes en ny kopi af tabellen , hvor datokolonnen er "castet" korrekt.
+4. Alternativ konverteres shapefilen til databasen med DBmanager. Derefter kan der oprettes en ny kopi af tabellen , hvor datokolonnen er "castet" korrekt.
 
 Eksempel på cast af kolonne til andet datoformat
 ```sql
