@@ -3,3 +3,6 @@
 *.shx
 *.dbf
 *.qpj
+*.png
+*pngw
+workshop/tidsserier/temp
