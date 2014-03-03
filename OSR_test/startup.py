@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+"""
+Purpose:    To test and report QGis capability of transforming correctly
+            to and from UTM-projection for coordinates far outside the UTM zone.
+Author:     asger@septima.dk
+Copyright:  Septima p/s 2014
+License:    You are free to use this software as you please as long as this notice
+            and the list of authors is preserved.
+"""
 
 from qgis.utils import qgsfunction, iface
 from qgis.core import *
@@ -7,6 +15,8 @@ from math import sqrt
 from PyQt4.QtGui import QMessageBox
 
 def check_osr_use_etmerc():
+  """Transforms a point from UTM19 to UTM24 and back. Then checks error.
+     Shows a message box with the result"""
     p19 = QgsPoint(500000,8600000)
     utm19 = QgsCoordinateReferenceSystem(32619, \
                                        QgsCoordinateReferenceSystem.PostgisCrsId)
