@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Purpose:    To test and report QGis capability of transforming correctly
+Purpose:    To test and report QGIS capability of transforming correctly
             to and from UTM-projection for coordinates far outside the UTM zone.
 Author:     asger@septima.dk
 Copyright:  Septima p/s 2014
