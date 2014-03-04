@@ -26,7 +26,7 @@ Under besøget hos Asiaq blev det testet, hvorvidt QGIS version 2.2 fungerer med
 
 Kontrolscript
 ---------------------------------------
-Hvis scriptet [`startup.py`](https://github.com/Septima/Asiaq_kursus/raw/master/OSR_test/startup.py) installereres som startup script i QGIS vil det under hver opstart af programmet vise en lille dialog, der fortæller, om den pågældende installation af QGIS kan transformere korrekt til/fra UTM.
+Hvis scriptet `startup.py` (Kan downloades [her](https://github.com/Septima/Asiaq_kursus/blob/master/OSR_test/startup.py)) installereres som startup script i QGIS vil det under hver opstart af programmet vise en lille dialog, der fortæller, om den pågældende installation af QGIS kan transformere korrekt til/fra UTM.
 
 Rent praktisk transformerer scriptet en koordinatet i UTM19 til UTM24 og tilbage til UTM19. Derefter beregnes afstanden mellem den originale UTM19-koordinat og den transformerede UTM19-koordinat. Hvis afstanden er mindre end 0,1 mm anses transformationen for at være 'korrekt'.
 
